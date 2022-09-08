@@ -1,1 +1,1 @@
-web: waitress-serve --port=0.0.0.0 main.wsgi:application
+web: waitress-serve --port=0.0.0.0 app.wsgi:main
