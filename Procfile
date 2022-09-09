@@ -1,1 +1,8 @@
-web: waitress-serve --port=0.0.0.0 app.wsgi:main
+web: waitress-serve \
+    --listen "*:$PORT" \
+    --trusted-proxy '*' \
+    --trusted-proxy-headers 'x-forwarded-for x-forwarded-proto x-forwarded-port' \
+    --log-untrusted-proxy-headers \
+    --clear-untrusted-proxy-headers \
+    --threads ${WEB_CONCURRENCY:-4} \
+    myapp:wsgifunc
