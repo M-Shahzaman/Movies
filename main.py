@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FloatField, IntegerField
 from wtforms.validators import DataRequired
 import requests
+from waitress import serve
 
 
 app = Flask(__name__)
@@ -48,7 +49,7 @@ class Movie(db.Model):
 # db.create_all()
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home():
     all_movies = Movie.query.order_by(Movie.rating).all()
     for i in range(len(all_movies)):
@@ -113,4 +114,4 @@ def delete():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")
